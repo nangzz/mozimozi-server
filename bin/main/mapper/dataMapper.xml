@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="com.example.demo.mapper.dataMapper">
+ 
+    <select id="productList" resultType="com.example.demo.vo.productDataVo">
+        select * from product
+    </select>
+    
+    <select id="userinfoList" resultType="com.example.demo.vo.userinfoDataVo">
+        select * from login
+    </select>
+    
+    <select id="mypageList" resultType="com.example.demo.vo.mypageDataVo">
+    	select * from mypage
+    </select>
+    
+    <select id="relativeList" resultType = "com.example.demo.vo.relativeDataVo">
+    	select * from relative_product
+    </select>
+    
+    <select id="categoryList" resultType = "com.example.demo.vo.categoryDataVo">
+    	select * from category
+    </select>
+    
+    <select id="setDramaList" resultType = "com.example.demo.vo.setDramaDataVo">
+    	select * from drama
+    </select>
+ 
+</mapper>
+
