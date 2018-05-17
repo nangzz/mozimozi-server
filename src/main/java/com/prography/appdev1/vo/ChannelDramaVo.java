@@ -2,10 +2,10 @@ package com.prography.appdev1.vo;
 
 import java.util.ArrayList;
 
-public class setDramaVo {
+public class ChannelDramaVo {
 	
-	public boolean success;
-	public ArrayList<setDramaDataVo> setDramaList;
+	public boolean success = false;
+	public ArrayList<ChannelDramaDataVo> dramaList = new ArrayList<ChannelDramaDataVo>();
 	
 	
 	public boolean isSuccess() {
@@ -14,11 +14,11 @@ public class setDramaVo {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-	public ArrayList<setDramaDataVo> getSetDramaList() {
-		return setDramaList;
+	public ArrayList<ChannelDramaDataVo> getDramaList() {
+		return dramaList;
 	}
-	public void setSetDramaList(ArrayList<setDramaDataVo> setDramaList) {
-		this.setDramaList = setDramaList;
+	public void setDramaList(ArrayList<ChannelDramaDataVo> dramaList) {
+		this.dramaList = dramaList;
 	}
 
 }

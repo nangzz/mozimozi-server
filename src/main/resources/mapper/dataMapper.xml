@@ -3,32 +3,26 @@
 <!DOCTYPE mapper 
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
  
-<mapper namespace="com.example.demo.mapper.dataMapper">
+<mapper namespace="com.prography.appdev1.mapper.dataMapper">
  
-    <select id="productList" resultType="com.example.demo.vo.productDataVo">
-        select * from product
+    
+    <select resultType = "com.prography.appdev1.vo.ChannelDramaDataVo" parameterType = "String" id ="dramaChannelCheck" >
+    	select d_act, d_name,d_img from drama where channel = #{channelname};
     </select>
     
-    <select id="userinfoList" resultType="com.example.demo.vo.userinfoDataVo">
-        select * from login
+    <select resultType = "com.prography.appdev1.vo.DramaCategoryDataVo" parameterType = "int" id = "categoryDramaCheck">
+    	select * from category;
     </select>
     
-    <select id="mypageList" resultType="com.example.demo.vo.mypageDataVo">
-    	select * from mypage
+     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "dramaProductCheck">
+    	select * from product where d_id = #{dramaid} and p_cat = #{categoryname};
     </select>
     
-    <select id="relativeList" resultType = "com.example.demo.vo.relativeDataVo">
-    	select * from relative_product
-    </select>
     
-    <select id="categoryList" resultType = "com.example.demo.vo.categoryDataVo">
-    	select * from category
-    </select>
     
-    <select id="setDramaList" resultType = "com.example.demo.vo.setDramaDataVo">
-    	select * from drama
-    </select>
+    
  
 </mapper>
 
