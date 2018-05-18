@@ -2,12 +2,14 @@ package com.prography.appdev1.project;
 
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,15 +41,14 @@ public class Project {
 	@Autowired //bean 이랑 비슷한 애 이거를 선언하면 getter setter를 자동으로 만들어
 	private dataMapper dm;
 	
-
-	@RequestMapping(value = "/channel", method = RequestMethod.POST)
-	public @ResponseBody ChannelDramaVo dramaChannelCheck (HttpServletRequest request){
+	
+	@RequestMapping(value = "/channel", method = RequestMethod.POST, consumes="application/json")
+	public @ResponseBody ChannelDramaVo dramaChannelCheck (@RequestBody Map<String, Object> json){
 	//responseBody는 각각 http 요청 몸체를 자바 객체로 변환하고 자바 객체를 http 응답 몸체로 변환하는데 사용
 
-		log.debug("request > " + request);
-		log.debug("request.getParameter > " + request.getParameterMap().get("channelname"));
 		
-		String channelname = ((String) request.getParameter("channelname"));
+		String channelname = (String) json.get("channelname");
+
 		
 		log.debug("channelname > " + channelname);
 		
