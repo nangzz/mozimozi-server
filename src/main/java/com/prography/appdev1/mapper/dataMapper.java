@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+
 import com.prography.appdev1.vo.CategoryProductDataVo;
 import com.prography.appdev1.vo.CategoryProductVo;
 import com.prography.appdev1.vo.ChannelDramaDataVo;
 import com.prography.appdev1.vo.ChannelDramaVo;
 import com.prography.appdev1.vo.DramaCategoryDataVo;
 import com.prography.appdev1.vo.DramaCateogoryVo;
+import com.prography.appdev1.vo.UserMypageDataVo;
 
 
 public interface dataMapper {
@@ -20,7 +22,10 @@ public interface dataMapper {
   public ArrayList<DramaCategoryDataVo> categoryDramaCheck(@Param("dramaid") int dramaid);
   
   public ArrayList<CategoryProductDataVo> dramaProductCheck(@Param("dramaid") int dramaid, @Param("categoryname") String category);
- 
+  
+  public ArrayList<UserMypageDataVo> userProductCheck(@Param("userid") String userid);
+  
+  
 }
 
 

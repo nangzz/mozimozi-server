@@ -1,9 +1,11 @@
 package com.prography.appdev1.project;
 
+
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +20,16 @@ import com.prography.appdev1.vo.ChannelDramaDataVo;
 import com.prography.appdev1.vo.ChannelDramaVo;
 import com.prography.appdev1.vo.DramaCategoryDataVo;
 import com.prography.appdev1.vo.DramaCateogoryVo;
+import com.prography.appdev1.vo.UserMypageDataVo;
+import com.prography.appdev1.vo.UserMypageVo;
 
 
 
 @RestController //이 아이를 사용해서 rest api를 만들수 있음 뷰를 만들어내는 것 뿐 아니라 데이터 처리를 위한 컨트롤러를 만들어낼 수 있음
 public class Project {
-	
+	Logger log = Logger.getLogger(this.getClass());
+
+	//출처: http://addio3305.tistory.com/43 [흔한 개발자의 개발 노트]
 	@RequestMapping("/sk") //요청의 url 패턴을 지정해서 매핑
 	public String main() {
 		return "sunkyung";
@@ -37,7 +43,13 @@ public class Project {
 	@RequestMapping(value = "/channel", method = RequestMethod.POST)
 	public @ResponseBody ChannelDramaVo dramaChannelCheck (HttpServletRequest request){
 	//responseBody는 각각 http 요청 몸체를 자바 객체로 변환하고 자바 객체를 http 응답 몸체로 변환하는데 사용
+
+		log.debug("request > " + request);
+		log.debug("request.getParameter > " + request.getParameterMap().get("channelname"));
+		
 		String channelname = ((String) request.getParameter("channelname"));
+		
+		log.debug("channelname > " + channelname);
 		
 		ChannelDramaVo channelDrama = new ChannelDramaVo();
 		
@@ -115,6 +127,34 @@ public class Project {
 		}
 		return CategoryProduct;
 	}
+	
+	@RequestMapping(value = "/MypageList", method = RequestMethod.POST)
+	public @ResponseBody UserMypageVo userProductCheck (HttpServletRequest request) {
+		String userid = ((String)(request.getParameter("userid")));
+		
+		UserMypageVo mypage = new UserMypageVo();
+		
+		ArrayList<UserMypageDataVo> mypageList = new ArrayList<UserMypageDataVo>();
+		
+		try {
+			mypageList = dm.userProductCheck(userid);
+			
+			if(mypageList.size()>0) {
+				mypage.setSuccess(true);
+				mypage.setMypageProduct(mypageList);
+			}
+			
+			else {
+				mypage.setSuccess(false);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mypage;
+		
+	}
+	
 	
 	
 	
