@@ -22,6 +22,12 @@ import com.prography.appdev1.vo.ChannelDramaDataVo;
 import com.prography.appdev1.vo.ChannelDramaVo;
 import com.prography.appdev1.vo.DramaCategoryDataVo;
 import com.prography.appdev1.vo.DramaCateogoryVo;
+import com.prography.appdev1.vo.IdCheckDataVo;
+import com.prography.appdev1.vo.IdCheckVo;
+import com.prography.appdev1.vo.LoginDataVo;
+import com.prography.appdev1.vo.LoginVo;
+import com.prography.appdev1.vo.SignUpDataVo;
+import com.prography.appdev1.vo.SignUpVo;
 import com.prography.appdev1.vo.UserMypageDataVo;
 import com.prography.appdev1.vo.UserMypageVo;
 
@@ -76,9 +82,10 @@ public class Project {
 		return channelDrama;
 	}
 	
-	@RequestMapping(value = "/dramaCategory", method = RequestMethod.POST)
-	public @ResponseBody DramaCateogoryVo categoryDramaCheck (HttpServletRequest request) {
-		int dramaid = (Integer.parseInt(request.getParameter("dramaid")));
+	@RequestMapping(value = "/dramaCategory", method = RequestMethod.POST, consumes = "application/json")
+	public @ResponseBody DramaCateogoryVo categoryDramaCheck (@RequestBody Map<String, Object> json) {
+		
+		
 		
 		DramaCateogoryVo category = new DramaCateogoryVo(); 
 		
@@ -86,7 +93,7 @@ public class Project {
 		
 		try {
 			
-			categoryList = dm.categoryDramaCheck(dramaid); 
+			categoryList = dm.categoryDramaCheck(); 
 			
 			if(categoryList.size()>0) {
 				category.setSuccess(true);;
@@ -103,10 +110,11 @@ public class Project {
 		return category; 
 	}
 	
-	@RequestMapping(value = "/DramaProduct", method = RequestMethod.POST)
-	public @ResponseBody CategoryProductVo dramaProductCheck (HttpServletRequest request) {
-		int dramaid = (Integer.parseInt(request.getParameter("dramaid")));
-		String categoryname = ((String)request.getParameter("categoryname"));
+	@RequestMapping(value = "/dramaProduct", method = RequestMethod.POST, consumes="application/json")
+	public @ResponseBody CategoryProductVo dramaProductCheck (@RequestBody Map<String, Object> json) {
+		
+		int dramaid = (int)json.get("dramaid");
+		String categoryname = (String)json.get("categoryname");
 		
 		CategoryProductVo CategoryProduct = new CategoryProductVo();
 		
@@ -129,32 +137,127 @@ public class Project {
 		return CategoryProduct;
 	}
 	
-	@RequestMapping(value = "/MypageList", method = RequestMethod.POST)
-	public @ResponseBody UserMypageVo userProductCheck (HttpServletRequest request) {
-		String userid = ((String)(request.getParameter("userid")));
+
+	
+	@RequestMapping(value = "/signUp", method = RequestMethod.POST, consumes = "application/json")
+	public @ResponseBody SignUpVo SignUpCheck(@RequestBody Map<String, Object> json) {
+		
+		String userid = (String)json.get("userid");
+		String password = (String)json.get("password");
+		String username = (String)json.get("username");
+		String usermail = (String)json.get("usermail");
+		
+		SignUpVo signUp = new SignUpVo();
+		
+		try {
+			
+			dm.SignUpCheck(userid, password, username, usermail);
+			signUp.setSuccess(true);
+			signUp.setMessage(null);
+			
+			
+		}
+		catch(Exception e) {
+			
+			signUp.setSuccess(false);
+			signUp.setMessage("입력한 아이디는 이미 있는 아이디입니다. 다른 아이디로 가입해주세요");
+			e.printStackTrace();
+		}
+		return signUp;
+		
+	}
+	
+	@RequestMapping(value = "/mypage", method =  RequestMethod.POST, consumes = "application/json")
+	public @ResponseBody UserMypageVo mypageCheck(@RequestBody Map<String,Object> json) {
+		
+		String userid = (String)json.get("userid");
 		
 		UserMypageVo mypage = new UserMypageVo();
-		
 		ArrayList<UserMypageDataVo> mypageList = new ArrayList<UserMypageDataVo>();
 		
 		try {
-			mypageList = dm.userProductCheck(userid);
+			mypageList = dm.mypageCheck(userid);
 			
 			if(mypageList.size()>0) {
+				
 				mypage.setSuccess(true);
 				mypage.setMypageProduct(mypageList);
+				
 			}
-			
 			else {
 				mypage.setSuccess(false);
 			}
+			
+		}
+		catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		return mypage;	
+	}
+	
+	
+	@RequestMapping(value = "/idCheck", method = RequestMethod.POST, consumes = "application/json")
+	public @ResponseBody IdCheckVo IdCheck(@RequestBody Map<String,Object> json) {
+		
+		String userid = (String)json.get("userid");
+		
+		IdCheckVo id = new IdCheckVo();
+		
+		ArrayList<IdCheckDataVo> idCheck = new ArrayList<IdCheckDataVo>();
+		
+		try {
+			idCheck = dm.IdCheck(userid);
+			
+			if(idCheck.size()>0) {
+				id.setSuccess(false);
+				id.setMessage("입력하신 아이디는 이미 있는 아이디 입니다. 다른 아이디를 입력해주세요");
+			}
+			else {
+				id.setSuccess(true);
+			}
+			
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		return mypage;
+		
+		return id;
 		
 	}
+	
+	@RequestMapping(value = "/user", method = RequestMethod.POST,consumes = "application/json")
+	public @ResponseBody LoginVo UserCheck(@RequestBody Map<String, Object> json) {
+		
+		String userid = (String)json.get("userid");
+		String password = (String)json.get("password");
+		
+		LoginVo login = new LoginVo();
+		ArrayList<LoginDataVo> loginresult = new ArrayList<LoginDataVo>();
+		
+		try {
+			loginresult = dm.UserCheck(userid, password);
+			
+			if(loginresult.size()>0) {
+				login.setSuccess(true);
+				login.setMessage(userid);
+			}
+			else {
+				login.setSuccess(false);
+				login.setMessage("아이디 또는 비밀번호가 일치하지 않습니다.");
+			}
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return login;
+		
+	}
+	
+	
+	
 	
 	
 	

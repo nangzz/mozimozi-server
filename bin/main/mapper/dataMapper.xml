@@ -20,6 +20,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select * from product where d_id = #{dramaid} and p_cat = #{categoryname};
     </select>
     
+    <insert parameterType = "com.prography.appdev1.vo.SignUpDataVo" id="SignUpCheck">
+    
+    	insert into login values(#{userid},#{password},#{username},#{usermail});
+    	
+    </insert>
+    
+    <select resultType = "com.prography.appdev1.vo.UserMypageDataVo"  id="mypageCheck">
+    
+    	select p_url,product.p_id,d_id,p_name,p_img,p_price,p_cat from product,mypage where user_id = #{userid} and product.p_id = mypage.p_id;
+    	
+    </select>
+    
+    <select resultType = "com.prography.appdev1.vo.IdCheckDataVo" id="IdCheck">
+    
+    	select user_id from login where user_id = #{userid};
+    	
+    </select>
+    
+    <select resultType = "com.prography.appdev1.vo.LoginDataVo"  id="UserCheck">
+    
+    	select user_id from login where user_id = #{userid} and user_pw = #{password};
+    
+    </select>
+	
   
     
     

@@ -1,0 +1,15 @@
+package com.prography.appdev1.vo;
+
+public class IdCheckDataVo {
+	
+	String user_id="";
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+}
