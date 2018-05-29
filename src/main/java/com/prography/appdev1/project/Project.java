@@ -162,7 +162,7 @@ public class Project {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return actorProduct;
 		
 	}
 	
