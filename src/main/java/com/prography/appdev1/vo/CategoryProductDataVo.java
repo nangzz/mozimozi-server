@@ -9,9 +9,16 @@ public class CategoryProductDataVo {
 	String p_img = "";
 	int p_price = 0;
 	String p_cat = "";
+	int clickNum = 0;
 	
 	
 	
+	public int getClickNum() {
+		return clickNum;
+	}
+	public void setClickNum(int clickNum) {
+		this.clickNum = clickNum;
+	}
 	public String getP_url() {
 		return p_url;
 	}

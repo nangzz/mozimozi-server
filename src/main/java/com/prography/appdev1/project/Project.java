@@ -26,6 +26,8 @@ import com.prography.appdev1.vo.IdCheckDataVo;
 import com.prography.appdev1.vo.IdCheckVo;
 import com.prography.appdev1.vo.LoginDataVo;
 import com.prography.appdev1.vo.LoginVo;
+import com.prography.appdev1.vo.RandomDramaDataVo;
+import com.prography.appdev1.vo.RandomDramaVo;
 import com.prography.appdev1.vo.SignUpDataVo;
 import com.prography.appdev1.vo.SignUpVo;
 import com.prography.appdev1.vo.UserMypageDataVo;
@@ -82,6 +84,32 @@ public class Project {
 		return channelDrama;
 	}
 	
+	@RequestMapping(value = "/RandomDrama", method = RequestMethod.POST, consumes = "application/json")
+	public @ResponseBody RandomDramaVo dramaList(@RequestBody Map<String,Object> json) {
+		
+		RandomDramaVo randomDrama= new RandomDramaVo();
+		
+		ArrayList<RandomDramaDataVo> dramaList = new ArrayList<RandomDramaDataVo>();
+		
+		try {
+			dramaList = dm.dramaList();
+			
+			if(dramaList.size()>0) {
+				
+				randomDrama.setSuccess(true);
+				randomDrama.setDramaList(dramaList);
+			}
+			else {
+				randomDrama.setSuccess(false);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return randomDrama;
+		
+	}
+	
 	@RequestMapping(value = "/dramaCategory", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody DramaCateogoryVo categoryDramaCheck (@RequestBody Map<String, Object> json) {
 		
@@ -110,8 +138,36 @@ public class Project {
 		return category; 
 	}
 	
+	@RequestMapping(value = "/ActorProduct",method = RequestMethod.POST, consumes = "application/json")
+	public @ResponseBody CategoryProductVo actorProduct(@RequestBody Map<String,Object> json) {
+		
+		int dramaid = (int)json.get("dramaid");
+		String actorname = (String)json.get("actorname");
+		
+		CategoryProductVo actorProduct = new CategoryProductVo();
+		ArrayList<CategoryProductDataVo> productList = new ArrayList<CategoryProductDataVo>();
+		
+		try {
+			productList = dm.actorDramaCheck(dramaid, actorname);
+			
+			if(productList.size()>0) {
+				actorProduct.setSuccess(true);
+				actorProduct.setCategoryProductList(productList);
+			}
+			else {
+				actorProduct.setSuccess(false);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
+	
 	@RequestMapping(value = "/dramaProduct", method = RequestMethod.POST, consumes="application/json")
-	public @ResponseBody CategoryProductVo dramaProductCheck (@RequestBody Map<String, Object> json) {
+	public @ResponseBody CategoryProductVo dramaCategoryProductCheck (@RequestBody Map<String, Object> json) {
 		
 		int dramaid = (int)json.get("dramaid");
 		String categoryname = (String)json.get("categoryname");
@@ -121,15 +177,32 @@ public class Project {
 		ArrayList<CategoryProductDataVo> categoryProductList = new ArrayList<CategoryProductDataVo>();
 		
 		try {
-			categoryProductList = dm.dramaProductCheck(dramaid, categoryname);
-			
-			if(categoryProductList.size()>0) {
-				CategoryProduct.setSuccess(true);
-				CategoryProduct.setCategoryProductList(categoryProductList);
-			}
+			if(categoryname != null) {
+				
+			categoryProductList = dm.dramaCategoryProductCheck(dramaid, categoryname);
+				if(categoryProductList.size()>0) {
+				
+					CategoryProduct.setSuccess(true);
+					CategoryProduct.setCategoryProductList(categoryProductList);
+					}
+				
 			else {
 				CategoryProduct.setSuccess(false);
 			}
+		}
+			else {
+				categoryProductList = dm.dramaProductCheck(dramaid);
+				if(categoryProductList.size()>0) {
+				
+					CategoryProduct.setSuccess(true);
+					CategoryProduct.setCategoryProductList(categoryProductList);
+					}
+				
+			else {
+				CategoryProduct.setSuccess(false);
+			}
+			}
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();

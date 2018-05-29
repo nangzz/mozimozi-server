@@ -16,8 +16,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select * from category;
     </select>
     
-     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "dramaProductCheck">
+     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "dramaCategoryProductCheck">
     	select * from product where d_id = #{dramaid} and p_cat = #{categoryname};
+    </select>
+    
+     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "dramaProductCheck">
+    	select * from product where d_id = #{dramaid};
+    </select>
+    
+    <select resultType = "com.prography.appdev1.vo.RandomDramaDataVo" id = "dramaList">
+    	select * from drama order by rand() limit 5;
+    </select>
+    
+    <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "actorDramaCheck">
+    	select * from product where d_id = #{dramaid} and p_name like "%#{actorname}%";
     </select>
     
     <insert parameterType = "com.prography.appdev1.vo.SignUpDataVo" id="SignUpCheck">
