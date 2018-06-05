@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "actorDramaCheck">
-    	select * from product where d_id = #{dramaid} and p_name like CONCAT('%', #{actorname}, '%');
+    	select * from product where d_id = #{dramaid} and p_name like "%#{actorname}%";
     </select>
     
     <insert parameterType = "com.prography.appdev1.vo.SignUpDataVo" id="SignUpCheck">

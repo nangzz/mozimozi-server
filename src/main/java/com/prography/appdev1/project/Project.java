@@ -84,8 +84,8 @@ public class Project {
 		return channelDrama;
 	}
 	
-	@RequestMapping(value = "/RandomDrama", method = RequestMethod.GET)
-	public @ResponseBody RandomDramaVo dramaList() {
+	@RequestMapping(value = "/RandomDrama", method = RequestMethod.POST, consumes = "application/json")
+	public @ResponseBody RandomDramaVo dramaList(@RequestBody Map<String,Object> json) {
 		
 		RandomDramaVo randomDrama= new RandomDramaVo();
 		
@@ -110,8 +110,8 @@ public class Project {
 		
 	}
 	
-	@RequestMapping(value = "/dramaCategory", method = RequestMethod.GET)
-	public @ResponseBody DramaCateogoryVo categoryDramaCheck () {
+	@RequestMapping(value = "/dramaCategory", method = RequestMethod.POST, consumes = "application/json")
+	public @ResponseBody DramaCateogoryVo categoryDramaCheck (@RequestBody Map<String, Object> json) {
 		
 		
 		
