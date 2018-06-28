@@ -9,14 +9,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
     
     <select resultType = "com.prography.appdev1.vo.ChannelDramaDataVo" parameterType = "String" id ="dramaChannelCheck" >
-    	select d_act, d_name,d_img from drama where channel = #{channelname};
+    	select d_act, d_name,d_img,d_id from drama where channel = #{channelname};
+    </select>
+    
+    <select resultType = "com.prography.appdev1.vo.ChannelDramaDataVo" parameterType = "int" id ="dramaCheck" >
+    	select d_act, d_name,d_img,d_id from drama where d_id = #{dramaid};
     </select>
     
     <select resultType = "com.prography.appdev1.vo.DramaCategoryDataVo" parameterType = "int" id = "categoryDramaCheck">
     	select * from category;
     </select>
     
-     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "dramaCategoryProductCheck">
+     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "ProductCheck">
+    	select * from product where d_id = #{dramaid};
+    </select>
+    
+    <insert parameterType = "com.prography.appdev1.vo.HeartCheckDataVo" id = "HeartCheck">
+    	insert into mypage values(#{userid},#{productid});
+    </insert>
+    
+    <delete parameterType = "com.prography.appdev1.vo.HeartCheckDataVo" id = "HeartRemove">
+    	delete from mypage where user_id = #{userid} and p_id = #{productid};
+    </delete>
+    
+    
+     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "cProductCheck">
+    	select * from product where p_cat = #{categoryname};
+    </select>
+    
+    <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "dramaCategoryProductCheck">
     	select * from product where d_id = #{dramaid} and p_cat = #{categoryname};
     </select>
     
@@ -29,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "actorDramaCheck">
-    	select * from product where d_id = #{dramaid} and p_name like "%#{actorname}%";
+    	select * from product where d_id = #{dramaid} and p_name like CONCAT('%', #{actorname}, '%');
     </select>
     
     <insert parameterType = "com.prography.appdev1.vo.SignUpDataVo" id="SignUpCheck">

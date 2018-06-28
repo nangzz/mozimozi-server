@@ -10,9 +10,15 @@ public class CategoryProductDataVo {
 	int p_price = 0;
 	String p_cat = "";
 	int clickNum = 0;
+	String p_brand = "";
 	
 	
-	
+	public String getP_brand() {
+		return p_brand;
+	}
+	public void setP_brand(String p_brand) {
+		this.p_brand = p_brand;
+	}
 	public int getClickNum() {
 		return clickNum;
 	}

@@ -5,8 +5,14 @@ public class ChannelDramaDataVo {
 	public String d_act = "";
 	public String d_name = "";
 	public String d_img = "";
-
+	public int d_id = 0;
 	
+	public int getD_id() {
+		return d_id;
+	}
+	public void setD_id(int d_id) {
+		this.d_id = d_id;
+	}
 	public String getD_img() {
 		return d_img;
 	}

@@ -21,10 +21,16 @@ public interface dataMapper {
 	
 	
   public ArrayList<ChannelDramaDataVo> dramaChannelCheck(@Param("channelname") String channelname);
+  
+  public ArrayList<ChannelDramaDataVo> dramaCheck(@Param("dramaid") int dramaid);
  
   public ArrayList<DramaCategoryDataVo> categoryDramaCheck();
   
   public ArrayList<CategoryProductDataVo> dramaCategoryProductCheck(@Param("dramaid") int dramaid, @Param("categoryname") String category);
+  
+  public ArrayList<CategoryProductDataVo> ProductCheck(@Param("dramaid") int dramaid);
+  
+  public ArrayList<CategoryProductDataVo> cProductCheck(@Param("categoryname") String categoryname);
   
   public ArrayList<CategoryProductDataVo> dramaProductCheck(@Param("dramaid") int dramaid);
   
@@ -35,6 +41,10 @@ public interface dataMapper {
   
   public void SignUpCheck(@Param("userid") String userid, @Param("password") String password,
 		  @Param("username") String username,@Param("usermail") String usermail);
+  
+  public void HeartCheck(@Param("userid") String userid, @Param("productid") int productid);
+  
+  public void HeartRemove(@Param("userid") String userid, @Param("productid") int productid);
   
   public ArrayList<UserMypageDataVo> mypageCheck(@Param("userid") String userid);
   
