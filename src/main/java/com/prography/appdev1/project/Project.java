@@ -28,6 +28,8 @@ import com.prography.appdev1.vo.IdCheckDataVo;
 import com.prography.appdev1.vo.IdCheckVo;
 import com.prography.appdev1.vo.LoginDataVo;
 import com.prography.appdev1.vo.LoginVo;
+import com.prography.appdev1.vo.PwSearchDataVo;
+import com.prography.appdev1.vo.PwSearchVo;
 import com.prography.appdev1.vo.RandomDramaDataVo;
 import com.prography.appdev1.vo.RandomDramaVo;
 import com.prography.appdev1.vo.SignUpDataVo;
@@ -49,6 +51,7 @@ public class Project {
 	@Autowired // bean 이랑 비슷한 애 이거를 선언하면 getter setter를 자동으로 만들어
 	private dataMapper dm;
 
+	//채널별 드라마 뿌려주기
 	@CrossOrigin
 	@RequestMapping(value = "/channel", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody ChannelDramaVo dramaChannelCheck(@RequestBody Map<String, Object> json) {
@@ -81,6 +84,8 @@ public class Project {
 		return channelDrama;
 	}
 
+	
+	//드라마 아이디 받아서 드라마 정보 뿌려주기
 	@CrossOrigin
 	@RequestMapping(value = "/dramaInfo", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody ChannelDramaVo dramaCheck(@RequestBody Map<String, Object> json) {
@@ -113,6 +118,8 @@ public class Project {
 		return channelDrama;
 	}
 
+	
+	//랜덤으로 드라마 뿌려주기
 	@RequestMapping(value = "/RandomDrama", method = RequestMethod.GET)
 	public @ResponseBody RandomDramaVo dramaList() {
 
@@ -137,6 +144,8 @@ public class Project {
 
 	}
 
+	
+	//카테고리 뿌려주기
 	@CrossOrigin
 	@RequestMapping(value = "/dramaCategory", method = RequestMethod.GET)
 	public @ResponseBody DramaCateogoryVo categoryDramaCheck() {
@@ -163,6 +172,8 @@ public class Project {
 		return category;
 	}
 
+	
+	//드라마 & 인물에 따른 상품
 	@CrossOrigin
 	@RequestMapping(value = "/ActorProduct", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo actorProduct(@RequestBody Map<String, Object> json) {
@@ -190,6 +201,8 @@ public class Project {
 
 	}
 
+	
+	//드라마 & 카테고리에 따른 상품
 	@CrossOrigin
 	@RequestMapping(value = "/dramaProduct", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo dramaCategoryProductCheck(@RequestBody Map<String, Object> json) {
@@ -233,6 +246,8 @@ public class Project {
 		return CategoryProduct;
 	}
 
+	
+	//드라마에 따른 상품들
 	@CrossOrigin
 	@RequestMapping(value = "/Product", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo ProductCheck(@RequestBody Map<String, Object> json) {
@@ -264,6 +279,7 @@ public class Project {
 		return CategoryProduct;
 	}
 
+	//웹에서만 사용 카테고리에 따른 상품
 	@CrossOrigin
 	@RequestMapping(value = "/cProduct", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo cProductCheck(@RequestBody Map<String, Object> json) {
@@ -295,6 +311,8 @@ public class Project {
 		return CategoryProduct;
 	}
 
+	
+	//회원가입
 	@CrossOrigin
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody SignUpVo SignUpCheck(@RequestBody Map<String, Object> json) {
@@ -322,6 +340,7 @@ public class Project {
 
 	}
 
+	//마이페이지 좋아요
 	@CrossOrigin
 	@RequestMapping(value = "/HeartCheck", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody HeartCheckVo HeartCheck(@RequestBody Map<String, Object> json) {
@@ -343,6 +362,7 @@ public class Project {
 
 	}
 	
+	//마이페이지 싫어요
 	@CrossOrigin
 	@RequestMapping(value = "/HeartRemove", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody HeartCheckVo HeartRemove(@RequestBody Map<String, Object> json) {
@@ -364,6 +384,7 @@ public class Project {
 
 	}
 
+	//마이페이지 
 	@CrossOrigin
 	@RequestMapping(value = "/mypage", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody UserMypageVo mypageCheck(@RequestBody Map<String, Object> json) {
@@ -392,6 +413,8 @@ public class Project {
 		return mypage;
 	}
 
+	
+	//아이디 중복 확인
 	@CrossOrigin
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody IdCheckVo IdCheck(@RequestBody Map<String, Object> json) {
@@ -420,6 +443,116 @@ public class Project {
 
 	}
 
+		//아이디 찾기
+		@CrossOrigin
+		@RequestMapping(value = "/idSearch", method = RequestMethod.POST, consumes = "application/json")
+		public @ResponseBody IdCheckVo IdSearch(@RequestBody Map<String, Object> json) {
+
+			String username = (String) json.get("username");
+			String useremail = (String)json.get("useremail");
+
+			IdCheckVo id = new IdCheckVo();
+
+			ArrayList<IdCheckDataVo> idCheck = new ArrayList<IdCheckDataVo>();
+
+			try {
+				idCheck = dm.idSearch(username,useremail);
+
+				if (idCheck.size() > 0) {
+					id.setSuccess(true);
+					id.setIdList(idCheck);
+				} else {
+					id.setSuccess(false);
+					id.setMessage("입력하신 회원정보가 없습니다.");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return id;
+
+		}
+		
+		//비밀번호 찾기
+				@CrossOrigin
+				@RequestMapping(value = "/pwSearch", method = RequestMethod.POST, consumes = "application/json")
+				public @ResponseBody PwSearchVo pwSearch(@RequestBody Map<String, Object> json) {
+
+					String username = (String) json.get("username");
+					String useremail = (String)json.get("useremail");
+					String userid = (String)json.get("userid");
+					
+					PwSearchVo pw = new PwSearchVo();
+
+					ArrayList<PwSearchDataVo> pwCheck = new ArrayList<PwSearchDataVo>();
+
+					try {
+						pwCheck = dm.pwSearch(username,useremail,userid);
+
+						if (pwCheck.size() > 0) {
+							pw.setSuccess(true);
+							pw.setIdpwList(pwCheck);
+						} else {
+							pw.setSuccess(false);
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+					return pw;
+
+				}
+
+	
+	@CrossOrigin
+	@RequestMapping(value = "/itemSearch", method = RequestMethod.POST, consumes = "application/json")
+	public @ResponseBody CategoryProductVo searchCheck(@RequestBody Map<String, Object> json) {
+
+		String searchname = (String) json.get("searchname");
+
+		CategoryProductVo product = new CategoryProductVo();
+		ArrayList<CategoryProductDataVo> productList = new ArrayList<CategoryProductDataVo>();
+
+		try {
+			productList = dm.searchPname(searchname);
+
+			if (productList.size() > 0) {
+				product.setSuccess(true);
+				product.setCategoryProductList(productList);
+			} 
+			
+			else {
+				product.setSuccess(false);
+				
+				try{
+					productList = dm.searchPcat(searchname);
+					
+					if (productList.size() > 0) {
+						product.setSuccess(true);
+						product.setCategoryProductList(productList);
+					} 
+					
+					else {
+						product.setSuccess(false);
+						}
+					
+				}
+				catch(Exception e) {
+					
+				}
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return product;
+
+	}
+	
+	//로그인
 	@CrossOrigin
 	@RequestMapping(value = "/user", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody LoginVo UserCheck(@RequestBody Map<String, Object> json) {

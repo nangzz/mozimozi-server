@@ -53,6 +53,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select * from product where d_id = #{dramaid} and p_name like CONCAT('%', #{actorname}, '%');
     </select>
     
+    <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "searchPname">
+    	select * from product where p_name like CONCAT('%', #{searchname}, '%');
+    </select>
+    
+    <select resultType = "com.prography.appdev1.vo.IdCheckDataVo" id = "idSearch">
+    	select user_id from login where user_name= #{username} and user_email = #{useremail};
+    </select>
+    
+    <select resultType = "com.prography.appdev1.vo.PwSearchDataVo" id = "pwSearch">
+    	select user_id,user_pw from login where user_name= #{username} and user_email = #{useremail} and user_id = #{userid};
+    </select>
+    
+     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "searchPcat">
+    	select * from product where p_cat like CONCAT('%', #{searchname}, '%');
+    </select>
+    
     <insert parameterType = "com.prography.appdev1.vo.SignUpDataVo" id="SignUpCheck">
     
     	insert into login values(#{userid},#{password},#{username},#{usermail});

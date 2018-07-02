@@ -12,6 +12,7 @@ import com.prography.appdev1.vo.DramaCategoryDataVo;
 import com.prography.appdev1.vo.DramaCateogoryVo;
 import com.prography.appdev1.vo.IdCheckDataVo;
 import com.prography.appdev1.vo.LoginDataVo;
+import com.prography.appdev1.vo.PwSearchDataVo;
 import com.prography.appdev1.vo.RandomDramaDataVo;
 import com.prography.appdev1.vo.SignUpDataVo;
 import com.prography.appdev1.vo.UserMypageDataVo;
@@ -54,7 +55,13 @@ public interface dataMapper {
   
   public ArrayList<RandomDramaDataVo> dramaList();
   
+  public ArrayList<CategoryProductDataVo> searchPname(@Param("searchname") String searchname);
   
+  public ArrayList<CategoryProductDataVo> searchPcat(@Param("searchname") String searchname);
+  
+  public ArrayList<IdCheckDataVo> idSearch(@Param("username") String username, @Param("useremail") String useremail);
+  
+  public ArrayList<PwSearchDataVo> pwSearch(@Param("username") String username, @Param("useremail") String useremail,@Param("userid")String userid);
 }
 
 
