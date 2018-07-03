@@ -171,6 +171,36 @@ public class Project {
 
 		return category;
 	}
+	
+
+	//top 10 상품 뿌려주기
+	@CrossOrigin
+	@RequestMapping(value = "/topProduct", method = RequestMethod.POST, consumes = "application/json")
+	public @ResponseBody CategoryProductVo topProduct(@RequestBody Map<String, Object> json) {
+
+		int clicknum = (int) json.get("clicknum");
+		
+
+		CategoryProductVo Product = new CategoryProductVo();
+		ArrayList<CategoryProductDataVo> productList = new ArrayList<CategoryProductDataVo>();
+
+		try {
+			productList = dm.topProduct(clicknum);
+
+			if (productList.size() > 0) {
+				Product.setSuccess(true);
+				Product.setCategoryProductList(productList);
+			} else {
+				Product.setSuccess(false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Product;
+
+	}
+
 
 	
 	//드라마 & 인물에 따른 상품

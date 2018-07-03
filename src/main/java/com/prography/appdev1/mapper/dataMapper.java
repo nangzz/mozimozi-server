@@ -62,6 +62,8 @@ public interface dataMapper {
   public ArrayList<IdCheckDataVo> idSearch(@Param("username") String username, @Param("useremail") String useremail);
   
   public ArrayList<PwSearchDataVo> pwSearch(@Param("username") String username, @Param("useremail") String useremail,@Param("userid")String userid);
+  
+  public ArrayList<CategoryProductDataVo> topProduct(@Param("clicknum") int clicknum);
 }
 
 
