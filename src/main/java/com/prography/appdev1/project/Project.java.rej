@@ -1,0 +1,15 @@
+diff a/src/main/java/com/prography/appdev1/project/Project.java b/src/main/java/com/prography/appdev1/project/Project.java	(rejected hunks)
+@@ -85,11 +85,11 @@
+ 	}
+ 
+ 	
+-	//��� ���̵� �޾Ƽ� ��� ���� �ѷ��ֱ�
++	//��� ���̵� �޾Ƽ� ��� ���� �ѷ��ֱ�
+ 	@CrossOrigin
+ 	@RequestMapping(value = "/dramaInfo", method = RequestMethod.POST, consumes = "application/json")
+ 	public @ResponseBody ChannelDramaVo dramaCheck(@RequestBody Map<String, Object> json) {
+-		// responseBody�� ���� http ��û ��ü�� �ڹ� ��ü�� ��ȯ�ϰ� �ڹ� ��ü�� http ���� ��ü�� ��ȯ�ϴµ� ���
++		// responseBody�� ���� http ��û ��ü�� �ڹ� ��ü�� ��ȯ�ϰ� �ڹ� ��ü�� http ���� ��ü�� ��ȯ�ϴµ� ���
+ 
+ 		int dramaid = (int) json.get("dramaid");
+ 
