@@ -32,6 +32,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	delete from mypage where user_id = #{userid} and p_id = #{productid};
     </delete>
     
+    <update parameterType = "int" id="increaseClickCount">
+    	update product set clickNum = clickNum + 1 where p_id = #{productid}; 
+    
+    </update>
     
      <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "cProductCheck">
     	select * from product where p_cat = #{categoryname};

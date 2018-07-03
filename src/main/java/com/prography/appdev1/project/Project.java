@@ -37,25 +37,25 @@ import com.prography.appdev1.vo.SignUpVo;
 import com.prography.appdev1.vo.UserMypageDataVo;
 import com.prography.appdev1.vo.UserMypageVo;
 
-@RestController // ÀÌ ¾ÆÀÌ¸¦ »ç¿ëÇØ¼­ rest api¸¦ ¸¸µé¼ö ÀÖÀ½ ºä¸¦ ¸¸µé¾î³»´Â °Í »Ó ¾Æ´Ï¶ó µ¥ÀÌÅÍ Ã³¸®¸¦ À§ÇÑ ÄÁÆ®·Ñ·¯¸¦ ¸¸µé¾î³¾ ¼ö ÀÖÀ½
+@RestController // ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ rest apiï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ä¸¦ ï¿½ï¿½ï¿½ï¿½î³»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½î³¾ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 public class Project {
 	Logger log = Logger.getLogger(this.getClass());
 
-	// ÃâÃ³: http://addio3305.tistory.com/43 [ÈçÇÑ °³¹ßÀÚÀÇ °³¹ß ³ëÆ®]
-	@RequestMapping("/sk") // ¿äÃ»ÀÇ url ÆĞÅÏÀ» ÁöÁ¤ÇØ¼­ ¸ÅÇÎ
+	// ï¿½ï¿½Ã³: http://addio3305.tistory.com/43 [ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®]
+	@RequestMapping("/sk") // ï¿½ï¿½Ã»ï¿½ï¿½ url ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public String main() {
 		return "sunkyung";
 	}
 
-	// ºóÀÇ ¿ä±¸»çÇ×°ú ¸ÅÄªµÇ´Â ¾ÖÇÃ¸®ÄÉÀÌ¼Ç ÄÁÅØ½ºÆ®»ó¿¡¼­ ´Ù¸¥ ºóÀ» Ã£¾Æ ºó °£ÀÇ ÀÇÁ¸¼ºÀ» ÀÚµ¿À¸·Î ¸¸Á·½ÃÅ°µµ·Ï ÇÏ´Â ¼ö´Ü
-	@Autowired // bean ÀÌ¶û ºñ½ÁÇÑ ¾Ö ÀÌ°Å¸¦ ¼±¾ğÇÏ¸é getter setter¸¦ ÀÚµ¿À¸·Î ¸¸µé¾î
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ä±¸ï¿½ï¿½ï¿½×°ï¿½ ï¿½ï¿½Äªï¿½Ç´ï¿½ ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½Ø½ï¿½Æ®ï¿½ó¿¡¼ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
+	@Autowired // bean ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì°Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ getter setterï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	private dataMapper dm;
 
-	//Ã¤³Îº° µå¶ó¸¶ »Ñ·ÁÁÖ±â
+	//Ã¤ï¿½Îºï¿½ ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ö±ï¿½
 	@CrossOrigin
 	@RequestMapping(value = "/channel", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody ChannelDramaVo dramaChannelCheck(@RequestBody Map<String, Object> json) {
-		// responseBody´Â °¢°¢ http ¿äÃ» ¸öÃ¼¸¦ ÀÚ¹Ù °´Ã¼·Î º¯È¯ÇÏ°í ÀÚ¹Ù °´Ã¼¸¦ http ÀÀ´ä ¸öÃ¼·Î º¯È¯ÇÏ´Âµ¥ »ç¿ë
+		// responseBodyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ http ï¿½ï¿½Ã» ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ú¹ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï°ï¿½ ï¿½Ú¹ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ http ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï´Âµï¿½ ï¿½ï¿½ï¿½
 
 		String channelname = (String) json.get("channelname");
 
@@ -85,11 +85,11 @@ public class Project {
 	}
 
 	
-	//µå¶ó¸¶ ¾ÆÀÌµğ ¹Ş¾Æ¼­ µå¶ó¸¶ Á¤º¸ »Ñ·ÁÁÖ±â
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ş¾Æ¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ö±ï¿½
 	@CrossOrigin
 	@RequestMapping(value = "/dramaInfo", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody ChannelDramaVo dramaCheck(@RequestBody Map<String, Object> json) {
-		// responseBody´Â °¢°¢ http ¿äÃ» ¸öÃ¼¸¦ ÀÚ¹Ù °´Ã¼·Î º¯È¯ÇÏ°í ÀÚ¹Ù °´Ã¼¸¦ http ÀÀ´ä ¸öÃ¼·Î º¯È¯ÇÏ´Âµ¥ »ç¿ë
+		// responseBodyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ http ï¿½ï¿½Ã» ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ú¹ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï°ï¿½ ï¿½Ú¹ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ http ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï´Âµï¿½ ï¿½ï¿½ï¿½
 
 		int dramaid = (int) json.get("dramaid");
 
@@ -119,7 +119,7 @@ public class Project {
 	}
 
 	
-	//·£´ıÀ¸·Î µå¶ó¸¶ »Ñ·ÁÁÖ±â
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ö±ï¿½
 	@RequestMapping(value = "/RandomDrama", method = RequestMethod.GET)
 	public @ResponseBody RandomDramaVo dramaList() {
 
@@ -145,7 +145,7 @@ public class Project {
 	}
 
 	
-	//Ä«Å×°í¸® »Ñ·ÁÁÖ±â
+	//Ä«ï¿½×°ï¿½ ï¿½Ñ·ï¿½ï¿½Ö±ï¿½
 	@CrossOrigin
 	@RequestMapping(value = "/dramaCategory", method = RequestMethod.GET)
 	public @ResponseBody DramaCateogoryVo categoryDramaCheck() {
@@ -173,7 +173,7 @@ public class Project {
 	}
 
 	
-	//µå¶ó¸¶ & ÀÎ¹°¿¡ µû¸¥ »óÇ°
+	//ï¿½ï¿½ï¿½ & ï¿½Î¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°
 	@CrossOrigin
 	@RequestMapping(value = "/ActorProduct", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo actorProduct(@RequestBody Map<String, Object> json) {
@@ -202,7 +202,7 @@ public class Project {
 	}
 
 	
-	//µå¶ó¸¶ & Ä«Å×°í¸®¿¡ µû¸¥ »óÇ°
+	//ï¿½ï¿½ï¿½ & Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°
 	@CrossOrigin
 	@RequestMapping(value = "/dramaProduct", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo dramaCategoryProductCheck(@RequestBody Map<String, Object> json) {
@@ -247,7 +247,7 @@ public class Project {
 	}
 
 	
-	//µå¶ó¸¶¿¡ µû¸¥ »óÇ°µé
+	//ï¿½ï¿½ó¸¶¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½
 	@CrossOrigin
 	@RequestMapping(value = "/Product", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo ProductCheck(@RequestBody Map<String, Object> json) {
@@ -279,7 +279,7 @@ public class Project {
 		return CategoryProduct;
 	}
 
-	//À¥¿¡¼­¸¸ »ç¿ë Ä«Å×°í¸®¿¡ µû¸¥ »óÇ°
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°
 	@CrossOrigin
 	@RequestMapping(value = "/cProduct", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo cProductCheck(@RequestBody Map<String, Object> json) {
@@ -312,7 +312,7 @@ public class Project {
 	}
 
 	
-	//È¸¿ø°¡ÀÔ
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@CrossOrigin
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody SignUpVo SignUpCheck(@RequestBody Map<String, Object> json) {
@@ -333,14 +333,14 @@ public class Project {
 		} catch (Exception e) {
 
 			signUp.setSuccess(false);
-			signUp.setMessage("ÀÔ·ÂÇÑ ¾ÆÀÌµğ´Â ÀÌ¹Ì ÀÖ´Â ¾ÆÀÌµğÀÔ´Ï´Ù. ´Ù¸¥ ¾ÆÀÌµğ·Î °¡ÀÔÇØÁÖ¼¼¿ä");
+			signUp.setMessage("íšŒì›ê°€ì…ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤. ì´ë¯¸ íšŒì› ì •ë³´ê°€ ìˆìœ¼ë‹ˆ ì•„ì´ë””/ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°ë¥¼ ì§„í–‰ í•´ì£¼ì„¸ìš”.");
 			e.printStackTrace();
 		}
 		return signUp;
 
 	}
 
-	//¸¶ÀÌÆäÀÌÁö ÁÁ¾Æ¿ä
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½
 	@CrossOrigin
 	@RequestMapping(value = "/HeartCheck", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody HeartCheckVo HeartCheck(@RequestBody Map<String, Object> json) {
@@ -356,13 +356,25 @@ public class Project {
 			heart.setSuccess(true);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			heart.setSuccess(false);
 		}
+		
+		
+		if(heart.isSuccess()) {
+			try {
+				dm.increaseClickCount(productid);	
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
 		return heart;
 
 	}
 	
-	//¸¶ÀÌÆäÀÌÁö ½È¾î¿ä
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È¾ï¿½ï¿½
 	@CrossOrigin
 	@RequestMapping(value = "/HeartRemove", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody HeartCheckVo HeartRemove(@RequestBody Map<String, Object> json) {
@@ -378,13 +390,14 @@ public class Project {
 			heart.setSuccess(true);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			heart.setSuccess(false);
 		}
 		return heart;
 
 	}
 
-	//¸¶ÀÌÆäÀÌÁö 
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	@CrossOrigin
 	@RequestMapping(value = "/mypage", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody UserMypageVo mypageCheck(@RequestBody Map<String, Object> json) {
@@ -414,7 +427,7 @@ public class Project {
 	}
 
 	
-	//¾ÆÀÌµğ Áßº¹ È®ÀÎ
+	//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ È®ï¿½ï¿½
 	@CrossOrigin
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody IdCheckVo IdCheck(@RequestBody Map<String, Object> json) {
@@ -430,7 +443,7 @@ public class Project {
 
 			if (idCheck.size() > 0) {
 				id.setSuccess(false);
-				id.setMessage("ÀÔ·ÂÇÏ½Å ¾ÆÀÌµğ´Â ÀÌ¹Ì ÀÖ´Â ¾ÆÀÌµğ ÀÔ´Ï´Ù. ´Ù¸¥ ¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
+				id.setMessage("ì¤‘ë³µëœ ì•„ì´ë””ì…ë‹ˆë‹¤. ë‹¤ë¥¸ ì•„ì´ë””ë¥¼ ì‚¬ìš© í•´ì£¼ì„¸ìš”.");
 			} else {
 				id.setSuccess(true);
 			}
@@ -443,7 +456,7 @@ public class Project {
 
 	}
 
-		//¾ÆÀÌµğ Ã£±â
+		//ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
 		@CrossOrigin
 		@RequestMapping(value = "/idSearch", method = RequestMethod.POST, consumes = "application/json")
 		public @ResponseBody IdCheckVo IdSearch(@RequestBody Map<String, Object> json) {
@@ -463,7 +476,7 @@ public class Project {
 					id.setIdList(idCheck);
 				} else {
 					id.setSuccess(false);
-					id.setMessage("ÀÔ·ÂÇÏ½Å È¸¿øÁ¤º¸°¡ ¾ø½À´Ï´Ù.");
+					id.setMessage("ì•„ì´ë””ê°€ ì—†ìŠµë‹ˆë‹¤. íšŒì›ê°€ì…ì„ í•´ì£¼ì„¸ìš”.");
 				}
 
 			} catch (Exception e) {
@@ -474,7 +487,7 @@ public class Project {
 
 		}
 		
-		//ºñ¹Ğ¹øÈ£ Ã£±â
+		//ï¿½ï¿½Ğ¹ï¿½È£ Ã£ï¿½ï¿½
 				@CrossOrigin
 				@RequestMapping(value = "/pwSearch", method = RequestMethod.POST, consumes = "application/json")
 				public @ResponseBody PwSearchVo pwSearch(@RequestBody Map<String, Object> json) {
@@ -540,7 +553,7 @@ public class Project {
 					
 				}
 				catch(Exception e) {
-					
+					e.printStackTrace();
 				}
 				
 			}
@@ -552,7 +565,7 @@ public class Project {
 
 	}
 	
-	//·Î±×ÀÎ
+	//ï¿½Î±ï¿½ï¿½ï¿½
 	@CrossOrigin
 	@RequestMapping(value = "/user", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody LoginVo UserCheck(@RequestBody Map<String, Object> json) {
@@ -571,7 +584,7 @@ public class Project {
 				login.setMessage(userid);
 			} else {
 				login.setSuccess(false);
-				login.setMessage("¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+				login.setMessage("ë¡œê·¸ì¸ ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤. ì•„ì´ë”” ë° ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸ í•´ì£¼ì„¸ìš”.");
 			}
 
 		} catch (Exception e) {
