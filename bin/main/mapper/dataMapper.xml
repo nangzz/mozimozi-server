@@ -97,6 +97,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     </select>
 	
+      <update parameterType = "int" id="increaseClickCount">
+        update product set clickNum = clickNum + 1 where p_id = #{productid}; 
+    
+    </update>
   
     
     
