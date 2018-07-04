@@ -24,8 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select * from product where d_id = #{dramaid};
     </select>
     
-     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "topProduct">
-    	select * from product where order by clickNum desc limit 10;
+     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "topList">
+    	select * from product order by clickNum desc limit 10;
     </select>
     
     <insert parameterType = "com.prography.appdev1.vo.HeartCheckDataVo" id = "HeartCheck">
