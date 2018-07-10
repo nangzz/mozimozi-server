@@ -464,7 +464,6 @@ public class Project {
 		return mypage;
 	}
 
-	// 占쏙옙占싱듸옙 占쌩븝옙 확占쏙옙
 	@CrossOrigin
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody IdCheckVo IdCheck(@RequestBody Map<String, Object> json) {
@@ -493,7 +492,6 @@ public class Project {
 
 	}
 
-	// 占쏙옙占싱듸옙 찾占쏙옙
 	@CrossOrigin
 	@RequestMapping(value = "/idSearch", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody IdCheckVo IdSearch(@RequestBody Map<String, Object> json) {
