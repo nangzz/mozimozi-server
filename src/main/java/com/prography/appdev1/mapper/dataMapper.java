@@ -63,9 +63,15 @@ public interface dataMapper {
   
   public ArrayList<PwSearchDataVo> pwSearch(@Param("username") String username, @Param("useremail") String useremail,@Param("userid")String userid);
   
-  public ArrayList<CategoryProductDataVo> topList();
+  public ArrayList<CategoryProductDataVo> topList(@Param("dramaid") int dramaid);
+  
+  public ArrayList<CategoryProductDataVo> mainTopList();
   
   public void increaseClickCount(@Param("productid") int productid);
+  
+  public  void deleteTodayProduct();
+  
+  public  void setTodayProduct();
 
 }
 

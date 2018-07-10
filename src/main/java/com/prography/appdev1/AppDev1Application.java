@@ -6,8 +6,10 @@ import javax.servlet.Filter;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.jboss.logging.Logger;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -17,22 +19,36 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
+import com.prography.appdev1.mapper.dataMapper;
+
 @SpringBootApplication
-@MapperScan(value= {"com.prography.appdev1.mapper"})
+@MapperScan(value = { "com.prography.appdev1.mapper" })
+@EnableScheduling
 public class AppDev1Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AppDev1Application.class, args);
 	}
-	
 
+	@Bean
+	public TaskScheduler taskScheduler() {
+		return new ConcurrentTaskScheduler();
+	}
+
+	
 	@Bean
 	public HttpMessageConverter<String> responseBodyConverter() {
 		return new StringHttpMessageConverter(Charset.forName("UTF-8"));
 	}
-	
+
 	@Order(Ordered.HIGHEST_PRECEDENCE)
 	@Bean
 	public Filter characterEncodingFilter() {
@@ -42,14 +58,15 @@ public class AppDev1Application {
 		return filter;
 	}
 
-	
-	@Bean   
-	public SqlSessionFactory sqlSessionFactory(DataSource dataSource)throws Exception{      
-	   SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();     
-	   sessionFactory.setDataSource(dataSource);    
-	   Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*Mapper.xml");           
-	   sessionFactory.setMapperLocations(res);   
-	   
-	   	return sessionFactory.getObject();   
+	@Bean
+	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+		sessionFactory.setDataSource(dataSource);
+		Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*Mapper.xml");
+		sessionFactory.setMapperLocations(res);
+
+		return sessionFactory.getObject();
 	}
+
+
 }

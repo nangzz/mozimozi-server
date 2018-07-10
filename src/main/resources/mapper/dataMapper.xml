@@ -20,13 +20,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select * from category;
     </select>
     
+    
      <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "ProductCheck">
     	select * from product where d_id = #{dramaid};
     </select>
     
      <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "topList">
-    	select * from product order by clickNum desc limit 10;
+    	select * from product where d_id = #{dramaid} order by clickNum desc limit 10;
     </select>
+
     
     <insert parameterType = "com.prography.appdev1.vo.HeartCheckDataVo" id = "HeartCheck">
     	insert into mypage values(#{userid},#{productid});
@@ -58,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "searchPname">
-    	select * from product where p_name like CONCAT('%', #{searchname}, '%');
+    	select * from product where p_name = #{searchname};
     </select>
     
     <select resultType = "com.prography.appdev1.vo.IdCheckDataVo" id = "idSearch">
@@ -101,6 +103,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update product set clickNum = clickNum + 1 where p_id = #{productid}; 
     
     </update>
+    
+    <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "mainTopList">
+    	select * from product,todayProduct where product.p_id = todayProduct.p_id;
+    </select>
+    
+    
+     <insert parameterType = "int" id="setTodayProduct">
+        insert into todayProduct(p_id) select p_id from product order by rand() limit 40;
+    </insert>
+    
+     <delete parameterType = "int" id="deleteTodayProduct">
+        delete from todayProduct;
+    </delete>
+    
+    
   
     
     

@@ -1,13 +1,20 @@
 package com.prography.appdev1.project;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,28 +44,20 @@ import com.prography.appdev1.vo.SignUpVo;
 import com.prography.appdev1.vo.UserMypageDataVo;
 import com.prography.appdev1.vo.UserMypageVo;
 
-@RestController // 占쏙옙 占쏙옙占싱몌옙 占쏙옙占쏙옙漫占� rest api占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙 占썰를 占쏙옙占쏙옙爭삼옙占� 占쏙옙 占쏙옙
-				// 占싣니띰옙 占쏙옙占쏙옙占쏙옙 처占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙트占싼뤄옙占쏙옙 占쏙옙占쏙옙爭� 占쏙옙 占쏙옙占쏙옙
+@RestController
 public class Project {
 	Logger log = Logger.getLogger(this.getClass());
 
-	// 占쏙옙처: http://addio3305.tistory.com/43 [占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙트]
-	@RequestMapping("/sk") // 占쏙옙청占쏙옙 url 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쌔쇽옙 占쏙옙占쏙옙
 	public String main() {
 		return "sunkyung";
 	}
 
-	// 占쏙옙占쏙옙 占썰구占쏙옙占쌓곤옙 占쏙옙칭占실댐옙 占쏙옙占시몌옙占쏙옙占싱쇽옙 占쏙옙占쌔쏙옙트占쏢에쇽옙 占쌕몌옙 占쏙옙占쏙옙 찾占쏙옙 占쏙옙
-	// 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쌘듸옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙키占쏙옙占쏙옙 占싹댐옙 占쏙옙占쏙옙
-	@Autowired // bean 占싱띰옙 占쏙옙占쏙옙占� 占쏙옙 占싱거몌옙 占쏙옙占쏙옙占싹몌옙 getter setter占쏙옙 占쌘듸옙占쏙옙占쏙옙 占쏙옙占쏙옙占�
+	@Autowired
 	private dataMapper dm;
 
-	// 채占싸븝옙 占쏙옙占� 占싼뤄옙占쌍깍옙
 	@CrossOrigin
 	@RequestMapping(value = "/channel", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody ChannelDramaVo dramaChannelCheck(@RequestBody Map<String, Object> json) {
-		// responseBody占쏙옙 占쏙옙占쏙옙 http 占쏙옙청 占쏙옙체占쏙옙 占쌘뱄옙 占쏙옙체占쏙옙 占쏙옙환占싹곤옙 占쌘뱄옙 占쏙옙체占쏙옙
-		// http 占쏙옙占쏙옙 占쏙옙체占쏙옙 占쏙옙환占싹는듸옙 占쏙옙占�
 
 		String channelname = (String) json.get("channelname");
 
@@ -87,12 +86,9 @@ public class Project {
 		return channelDrama;
 	}
 
-	// 占쏙옙占� 占쏙옙占싱듸옙 占쌨아쇽옙 占쏙옙占� 占쏙옙占쏙옙 占싼뤄옙占쌍깍옙
 	@CrossOrigin
 	@RequestMapping(value = "/dramaInfo", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody ChannelDramaVo dramaCheck(@RequestBody Map<String, Object> json) {
-		// responseBody占쏙옙 占쏙옙占쏙옙 http 占쏙옙청 占쏙옙체占쏙옙 占쌘뱄옙 占쏙옙체占쏙옙 占쏙옙환占싹곤옙 占쌘뱄옙 占쏙옙체占쏙옙
-		// http 占쏙옙占쏙옙 占쏙옙체占쏙옙 占쏙옙환占싹는듸옙 占쏙옙占�
 
 		int dramaid = (int) json.get("dramaid");
 
@@ -121,7 +117,6 @@ public class Project {
 		return channelDrama;
 	}
 
-	// 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占� 占싼뤄옙占쌍깍옙
 	@RequestMapping(value = "/RandomDrama", method = RequestMethod.GET)
 	public @ResponseBody RandomDramaVo dramaList() {
 
@@ -146,7 +141,6 @@ public class Project {
 
 	}
 
-	// 카占쌓곤옙 占싼뤄옙占쌍깍옙
 	@CrossOrigin
 	@RequestMapping(value = "/dramaCategory", method = RequestMethod.GET)
 	public @ResponseBody DramaCateogoryVo categoryDramaCheck() {
@@ -173,10 +167,38 @@ public class Project {
 		return category;
 	}
 
-	// top 10 占쏙옙품 占싼뤄옙占쌍깍옙
+
 	@CrossOrigin
-	@RequestMapping(value = "/topProduct", method = RequestMethod.GET)
-	public @ResponseBody CategoryProductVo topList() {
+	@RequestMapping(value = "/mainTopProduct", method = RequestMethod.GET)
+	public @ResponseBody CategoryProductVo topProductList() {
+
+		
+		CategoryProductVo mainProduct = new CategoryProductVo();
+
+		ArrayList<CategoryProductDataVo> mainProductList = new ArrayList<CategoryProductDataVo>();
+
+		try {
+			mainProductList = dm.mainTopList();
+			if (mainProductList.size() > 0) {
+				mainProduct.setSuccess(true);
+				;
+				mainProduct.setCategoryProductList(mainProductList);
+			} else {
+				mainProduct.setSuccess(false);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return mainProduct;
+	}
+
+	@CrossOrigin
+	@RequestMapping(value = "/topProduct", method = RequestMethod.POST, consumes = "application/json")
+	public @ResponseBody CategoryProductVo topList(@RequestBody Map<String, Object> json) {
+
+		int dramaid = (int) json.get("dramaid");
 
 		CategoryProductVo topProduct = new CategoryProductVo();
 
@@ -184,7 +206,7 @@ public class Project {
 
 		try {
 
-			topProductList = dm.topList();
+			topProductList = dm.topList(dramaid);
 
 			if (topProductList.size() > 0) {
 				topProduct.setSuccess(true);
@@ -199,8 +221,6 @@ public class Project {
 		return topProduct;
 	}
 
-
-	// 占쏙옙占� & 占싸뱄옙占쏙옙 占쏙옙占쏙옙 占쏙옙품
 	@CrossOrigin
 	@RequestMapping(value = "/ActorProduct", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo actorProduct(@RequestBody Map<String, Object> json) {
@@ -228,7 +248,6 @@ public class Project {
 
 	}
 
-	// 占쏙옙占� & 카占쌓곤옙占쏙옙 占쏙옙占쏙옙 占쏙옙품
 	@CrossOrigin
 	@RequestMapping(value = "/dramaProduct", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo dramaCategoryProductCheck(@RequestBody Map<String, Object> json) {
@@ -272,7 +291,6 @@ public class Project {
 		return CategoryProduct;
 	}
 
-	// 占쏙옙窄뗄占� 占쏙옙占쏙옙 占쏙옙품占쏙옙
 	@CrossOrigin
 	@RequestMapping(value = "/Product", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo ProductCheck(@RequestBody Map<String, Object> json) {
@@ -304,7 +322,6 @@ public class Project {
 		return CategoryProduct;
 	}
 
-	// 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占� 카占쌓곤옙占쏙옙 占쏙옙占쏙옙 占쏙옙품
 	@CrossOrigin
 	@RequestMapping(value = "/cProduct", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody CategoryProductVo cProductCheck(@RequestBody Map<String, Object> json) {
@@ -336,7 +353,6 @@ public class Project {
 		return CategoryProduct;
 	}
 
-	// 회占쏙옙占쏙옙占쏙옙
 	@CrossOrigin
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody SignUpVo SignUpCheck(@RequestBody Map<String, Object> json) {
@@ -364,7 +380,6 @@ public class Project {
 
 	}
 
-	// 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占싣울옙
 	@CrossOrigin
 	@RequestMapping(value = "/HeartCheck", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody HeartCheckVo HeartCheck(@RequestBody Map<String, Object> json) {
@@ -397,7 +412,6 @@ public class Project {
 
 	}
 
-	// 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占싫억옙占�
 	@CrossOrigin
 	@RequestMapping(value = "/HeartRemove", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody HeartCheckVo HeartRemove(@RequestBody Map<String, Object> json) {
@@ -546,6 +560,7 @@ public class Project {
 	public @ResponseBody CategoryProductVo searchCheck(@RequestBody Map<String, Object> json) {
 
 		String searchname = (String) json.get("searchname");
+		
 
 		CategoryProductVo product = new CategoryProductVo();
 		ArrayList<CategoryProductDataVo> productList = new ArrayList<CategoryProductDataVo>();
@@ -562,6 +577,7 @@ public class Project {
 				product.setSuccess(false);
 
 				try {
+					
 					productList = dm.searchPcat(searchname);
 
 					if (productList.size() > 0) {
