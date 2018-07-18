@@ -260,9 +260,7 @@ public class Project {
 		ArrayList<CategoryProductDataVo> categoryProductList = new ArrayList<CategoryProductDataVo>();
 
 		try {
-			if (categoryname != null) {
-
-				categoryProductList = dm.dramaCategoryProductCheck(dramaid, categoryname);
+				categoryProductList = dm.dramaCategoryProductCheck(dramaid,categoryname);
 				if (categoryProductList.size() > 0) {
 
 					CategoryProduct.setSuccess(true);
@@ -270,20 +268,20 @@ public class Project {
 				}
 
 				else {
-					CategoryProduct.setSuccess(false);
-				}
-			} else {
-				categoryProductList = dm.dramaProductCheck(dramaid);
-				if (categoryProductList.size() > 0) {
+					
+						categoryProductList = dm.dramaProductCheck(dramaid);
+						if (categoryProductList.size() > 0) {
 
-					CategoryProduct.setSuccess(true);
-					CategoryProduct.setCategoryProductList(categoryProductList);
-				}
+							CategoryProduct.setSuccess(true);
+							CategoryProduct.setCategoryProductList(categoryProductList);
+						}
 
-				else {
-					CategoryProduct.setSuccess(false);
-				}
-			}
+						else {
+							CategoryProduct.setSuccess(false);
+						}
+					}
+			
+		
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -373,7 +371,7 @@ public class Project {
 		} catch (Exception e) {
 
 			signUp.setSuccess(false);
-			signUp.setMessage("占쌉뤄옙占쏙옙 占쏙옙占싱듸옙占� 占싱뱄옙 占쌍댐옙 占쏙옙占싱듸옙占쌉니댐옙. 占쌕몌옙 占쏙옙占싱듸옙占� 占쏙옙占쏙옙占쏙옙占쌍쇽옙占쏙옙");
+			signUp.setMessage("입력하신 아이디는 이미 있는 아이디입니다.");
 			e.printStackTrace();
 		}
 		return signUp;
@@ -479,7 +477,7 @@ public class Project {
 
 			if (idCheck.size() > 0) {
 				id.setSuccess(false);
-				id.setMessage("占쌉뤄옙占싹쏙옙 占쏙옙占싱듸옙占� 占싱뱄옙 占쌍댐옙 占쏙옙占싱듸옙 占쌉니댐옙. 占쌕몌옙 占쏙옙占싱듸옙 占쌉뤄옙占쏙옙占쌍쇽옙占쏙옙");
+				id.setMessage("입력하신 아이디는 이미 있는 아이디입니다.");
 			} else {
 				id.setSuccess(true);
 			}
@@ -511,7 +509,7 @@ public class Project {
 				id.setIdList(idCheck);
 			} else {
 				id.setSuccess(false);
-				id.setMessage("占쌉뤄옙占싹쏙옙 회占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싹댐옙.");
+				id.setMessage("입력하신 아이디는 존재하지 않습니다.");
 			}
 
 		} catch (Exception e) {
@@ -564,6 +562,7 @@ public class Project {
 		ArrayList<CategoryProductDataVo> productList = new ArrayList<CategoryProductDataVo>();
 
 		try {
+			
 			productList = dm.searchPname(searchname);
 
 			if (productList.size() > 0) {
@@ -572,10 +571,7 @@ public class Project {
 			}
 
 			else {
-				product.setSuccess(false);
 
-				try {
-					
 					productList = dm.searchPcat(searchname);
 
 					if (productList.size() > 0) {
@@ -587,10 +583,6 @@ public class Project {
 						product.setSuccess(false);
 					}
 
-				} catch (Exception e) {
-					e.printStackTrace();
-
-				}
 
 			}
 		} catch (Exception e) {
@@ -620,7 +612,7 @@ public class Project {
 				login.setMessage(userid);
 			} else {
 				login.setSuccess(false);
-				login.setMessage("占쏙옙占싱듸옙 占실댐옙 占쏙옙橘占싫ｏ옙占� 占쏙옙치占쏙옙占쏙옙 占십쏙옙占싹댐옙.");
+				login.setMessage("아이디 혹은 비밀번호가 일치 하지 않습니다.");
 			}
 
 		} catch (Exception e) {

@@ -31,11 +31,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     
     <insert parameterType = "com.prography.appdev1.vo.HeartCheckDataVo" id = "HeartCheck">
-    	insert into mypage values(#{userid},#{productid});
+    	insert into mypage1 values(#{userid},#{productid});
     </insert>
     
     <delete parameterType = "com.prography.appdev1.vo.HeartCheckDataVo" id = "HeartRemove">
-    	delete from mypage where user_id = #{userid} and p_id = #{productid};
+    	delete from mypage1 where user_id = #{userid} and p_id = #{productid};
     </delete>
     
     
@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "searchPname">
-    	select * from product where p_name = #{searchname};
+    	select * from product where p_name like CONCAT('%', #{searchname}, '%');
     </select>
     
     <select resultType = "com.prography.appdev1.vo.IdCheckDataVo" id = "idSearch">
@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
      <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "searchPcat">
-    	select * from product where p_cat like CONCAT('%', #{searchname}, '%');
+    	select * from product where p_cat= #{searchname};
     </select>
     
     <insert parameterType = "com.prography.appdev1.vo.SignUpDataVo" id="SignUpCheck">
@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select resultType = "com.prography.appdev1.vo.UserMypageDataVo"  id="mypageCheck">
     
-    	select p_url,product.p_id,d_id,p_name,p_img,p_price,p_cat from product,mypage where user_id = #{userid} and product.p_id = mypage.p_id;
+    	select p_url,product.p_id,d_id,p_name,p_img,p_price,p_cat from product,mypage1 where user_id = #{userid} and product.p_id = mypage1.p_id;
     	
     </select>
     
