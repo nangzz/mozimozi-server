@@ -232,17 +232,39 @@ public class Project {
 		ArrayList<CategoryProductDataVo> productList = new ArrayList<CategoryProductDataVo>();
 
 		try {
-			productList = dm.actorDramaCheck(dramaid, actorname);
 
-			if (productList.size() > 0) {
-				actorProduct.setSuccess(true);
-				actorProduct.setCategoryProductList(productList);
-			} else {
-				actorProduct.setSuccess(false);
+			if (actorname.equals(" ") ) {
+
+				productList = dm.dramaProductCheck(dramaid);
+				if (productList.size() > 0) {
+
+					actorProduct.setSuccess(true);
+					actorProduct.setCategoryProductList(productList);
+				}
+
+				else {
+					actorProduct.setSuccess(false);
+				}
+				
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+			else {
+				productList = dm.actorDramaCheck(dramaid,actorname);
+				if(productList.size()>0) {
+					actorProduct.setSuccess(true);
+					actorProduct.setCategoryProductList(productList);}
+				else {
+					actorProduct.setSuccess(false);
+					}
+				}
+			
+			
+		
+	
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 
 		return actorProduct;
 
@@ -260,26 +282,34 @@ public class Project {
 		ArrayList<CategoryProductDataVo> categoryProductList = new ArrayList<CategoryProductDataVo>();
 
 		try {
-				categoryProductList = dm.dramaCategoryProductCheck(dramaid,categoryname);
-				if (categoryProductList.size() > 0) {
+				//categoryProductList = dm.dramaCategoryProductCheck(dramaid,categoryname);
+				
+				if (categoryname.equals(" ") ) {
 
-					CategoryProduct.setSuccess(true);
-					CategoryProduct.setCategoryProductList(categoryProductList);
+					categoryProductList = dm.dramaProductCheck(dramaid);
+					if (categoryProductList.size() > 0) {
+
+						CategoryProduct.setSuccess(true);
+						CategoryProduct.setCategoryProductList(categoryProductList);
+					}
+
+					else {
+						CategoryProduct.setSuccess(false);
+					}
+					
 				}
 
 				else {
-					
-						categoryProductList = dm.dramaProductCheck(dramaid);
-						if (categoryProductList.size() > 0) {
-
-							CategoryProduct.setSuccess(true);
-							CategoryProduct.setCategoryProductList(categoryProductList);
-						}
-
-						else {
-							CategoryProduct.setSuccess(false);
+					categoryProductList = dm.dramaCategoryProductCheck(dramaid,categoryname);
+					if(categoryProductList.size()>0) {
+						CategoryProduct.setSuccess(true);
+						CategoryProduct.setCategoryProductList(categoryProductList);}
+					else {
+						CategoryProduct.setSuccess(false);
 						}
 					}
+				
+				
 			
 		
 
