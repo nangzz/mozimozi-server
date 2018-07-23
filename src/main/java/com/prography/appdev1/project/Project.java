@@ -639,10 +639,9 @@ public class Project {
 
 			if (loginresult.size() > 0) {
 				login.setSuccess(true);
-				login.setMessage(userid);
+				login.setUserInfo(loginresult);
 			} else {
 				login.setSuccess(false);
-				login.setMessage("아이디 혹은 비밀번호가 일치 하지 않습니다.");
 			}
 
 		} catch (Exception e) {

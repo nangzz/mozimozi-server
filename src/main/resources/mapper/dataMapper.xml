@@ -22,11 +22,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     
      <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "ProductCheck">
-    	select * from product where d_id = #{dramaid};
+    	select * from product,drama where drama.d_id = #{dramaid} and product.d_id = drama.d_id;
     </select>
     
      <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "topList">
-    	select * from product where d_id = #{dramaid} order by clickNum desc limit 10;
+    	select * from product,drama where product.d_id = drama.d_id and product.d_id = #{dramaid} order by clickNum desc limit 10;
     </select>
 
     
@@ -40,15 +40,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     
      <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "cProductCheck">
-    	select * from product where p_cat = #{categoryname};
+    	select * from product,drama where drama.d_id = product.d_id and p_cat = #{categoryname};
     </select>
     
     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "dramaCategoryProductCheck">
-    	select * from product where d_id = #{dramaid} and p_cat = #{categoryname};
+    	select * from product,drama where product.d_id = drama.d_id and product.d_id = #{dramaid} and p_cat = #{categoryname};
     </select>
     
      <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "dramaProductCheck">
-    	select * from product where d_id = #{dramaid};
+    	select * from product,drama where product.d_id = drama.d_id and product.d_id = #{dramaid};
     </select>
     
     <select resultType = "com.prography.appdev1.vo.RandomDramaDataVo" id = "dramaList">
@@ -56,11 +56,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "actorDramaCheck">
-    	select * from product where d_id = #{dramaid} and p_name like CONCAT('%', #{actorname}, '%');
+    	select * from product,drama where product.d_id = drama.d_id and product.d_id = #{dramaid} and p_name like CONCAT('%', #{actorname}, '%');
     </select>
     
     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "searchPname">
-    	select * from product where p_name like CONCAT('%', #{searchname}, '%');
+    	select * from product,drama where product.d_id = drama.d_id and p_name like CONCAT('%', #{searchname}, '%');
     </select>
     
     <select resultType = "com.prography.appdev1.vo.IdCheckDataVo" id = "idSearch">
@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
      <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "searchPcat">
-    	select * from product where p_cat= #{searchname};
+    	select * from product,drama where product.d_id = drama.d_id and p_cat= #{searchname};
     </select>
     
     <insert parameterType = "com.prography.appdev1.vo.SignUpDataVo" id="SignUpCheck">
@@ -83,10 +83,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select resultType = "com.prography.appdev1.vo.UserMypageDataVo"  id="mypageCheck">
     
-    	select p_url,product.p_id,d_id,p_name,p_img,p_price,p_cat from product,mypage1 where user_id = #{userid} and product.p_id = mypage1.p_id;
+    	select * from product,mypage1,drama where drama.d_id = product.d_id and user_id = #{userid} and product.p_id = mypage1.p_id;
     	
     </select>
-    
+   
     <select resultType = "com.prography.appdev1.vo.IdCheckDataVo" id="IdCheck">
     
     	select user_id from login where user_id = #{userid};
@@ -95,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select resultType = "com.prography.appdev1.vo.LoginDataVo"  id="UserCheck">
     
-    	select user_id from login where user_id = #{userid} and user_pw = #{password};
+    	select * from login where user_id = #{userid} and user_pw = #{password};
     
     </select>
 	
@@ -105,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     <select resultType = "com.prography.appdev1.vo.CategoryProductDataVo" id = "mainTopList">
-    	select * from product,todayProduct where product.p_id = todayProduct.p_id;
+    	select * from product,todayProduct,drama where product.d_id = drama.d_id and product.p_id = todayProduct.p_id;
     </select>
     
     

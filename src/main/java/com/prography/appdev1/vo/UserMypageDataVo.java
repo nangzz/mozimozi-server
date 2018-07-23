@@ -2,6 +2,8 @@ package com.prography.appdev1.vo;
 
 public class UserMypageDataVo {
 	
+	String p_act = "";
+	String d_name = "";
 	String p_url = "";
 	int p_id = 0;
 	int d_id = 0;
@@ -12,8 +14,20 @@ public class UserMypageDataVo {
 	
 	
 	
+	public String getP_act() {
+		return p_act;
+	}
+	public void setP_act(String p_act) {
+		this.p_act = p_act;
+	}
 	public String getP_url() {
 		return p_url;
+	}
+	public String getD_name() {
+		return d_name;
+	}
+	public void setD_name(String d_name) {
+		this.d_name = d_name;
 	}
 	public void setP_url(String p_url) {
 		this.p_url = p_url;

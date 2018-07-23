@@ -3,14 +3,34 @@ package com.prography.appdev1.vo;
 public class LoginDataVo {
 	
 	String user_id = "";
-	String password = "";
+	String user_pw = "";
+	String user_name = "";
+	String user_email = "";
 
-	public String getPassword() {
-		return password;
+	
+
+	public String getUser_pw() {
+		return user_pw;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUser_pw(String user_pw) {
+		this.user_pw = user_pw;
+	}
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+	public String getUser_email() {
+		return user_email;
+	}
+
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
 	}
 
 	public String getUser_id() {

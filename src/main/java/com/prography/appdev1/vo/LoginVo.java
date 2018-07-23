@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class LoginVo {
 	
 	boolean success;
-	String message = "";
+	ArrayList<LoginDataVo> UserInfo = new ArrayList<LoginDataVo>();
 	
 	public boolean isSuccess() {
 		return success;
@@ -13,12 +13,13 @@ public class LoginVo {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-	public String getMessage() {
-		return message;
+	public ArrayList<LoginDataVo> getUserInfo() {
+		return UserInfo;
 	}
-	public void setMessage(String message) {
-		this.message = message;
+	public void setUserInfo(ArrayList<LoginDataVo> userInfo) {
+		UserInfo = userInfo;
 	}
+
 	
 	
 	
