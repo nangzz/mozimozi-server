@@ -44,6 +44,7 @@ import com.prography.appdev1.vo.SignUpVo;
 import com.prography.appdev1.vo.UserMypageDataVo;
 import com.prography.appdev1.vo.UserMypageVo;
 
+@Controller
 @RestController
 public class Project {
 	Logger log = Logger.getLogger(this.getClass());
@@ -651,4 +652,28 @@ public class Project {
 
 	}
 
+
+
+
+// 占싸깍옙占쏙옙
+@CrossOrigin
+@RequestMapping(value = "/withDraw", method = RequestMethod.POST, consumes = "application/json")
+public @ResponseBody void WithDrawCheck(@RequestBody Map<String, Object> json) {
+
+	String userid = (String) json.get("userid");
+	String password = (String) json.get("password");
+
+	try {
+		dm.WithDrawCheck(userid, password);
+		System.out.println("탈퇴 성공");
+		
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+
 }
+
+}
+

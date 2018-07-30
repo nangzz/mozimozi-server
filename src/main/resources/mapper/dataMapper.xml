@@ -117,6 +117,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from todayProduct;
     </delete>
     
+     <delete parameterType = "String" id="WithDrawCheck">
+        delete from login where user_id = #{userid} and user_pw = #{password};
+    </delete>
+    
     
   
     

@@ -72,6 +72,8 @@ public interface dataMapper {
   public  void deleteTodayProduct();
   
   public  void setTodayProduct();
+  
+  public void WithDrawCheck(@Param("userid") String userid, @Param("password") String password);
 
 }
 
