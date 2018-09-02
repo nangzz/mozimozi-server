@@ -1,1 +1,1 @@
-# app_dev_1_server
+# mozimozi-server
